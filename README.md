@@ -1,5 +1,10 @@
 # Open Source Intelligence Profile Deviser
 Python Web Scrapper that creates a profile on an individual based on their web footprint.
+Current project development:</BR>
+Gather input requirements
+Generate useful links
+
+Additional Requirements:
 
 # This is currently in development and the source is not complete
 
