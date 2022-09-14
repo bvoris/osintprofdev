@@ -1,4 +1,4 @@
-# Open Source Intelligence Profiler
+# Open Source Intelligence Profiler {STILL IN DEVELOPMENT 9-2022}
 Created By: Brad Voris
 Requirements: requests, types-requests, & BeautifulSoup4 <BR />
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gather to generate a list and
@@ -10,6 +10,7 @@ scrape specific websites to gather additional information about the target. This
 - [x] Generate links
 - [X] User Menu System
 - [X] weblinks generated
+- [X] generate onscreen report
 - [ ] generate html profile
 - [ ] Review feature requests
 
