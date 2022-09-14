@@ -9,7 +9,7 @@ scrape specific websites to gather additional information about the target. This
 - [x] Develop user input
 - [x] Generate links
 - [X] User Menu System
-- [X] weblinks generated
+- [X] web links generated
 - [X] generate onscreen report
 - [ ] generate html profile
 - [ ] Review feature requests
