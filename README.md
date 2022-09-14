@@ -2,7 +2,7 @@
 Created By: Brad Voris <BR />
 Requirements: requests, types-requests, & BeautifulSoup4 <BR />
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
-scrape specific websites to gather additional information about the target. This is a reconnaissance that can be used by red teams to help facilitate penetration testing through social engineering.<BR />
+scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.<BR />
 
 
 # OSINTProfiler To Do list
