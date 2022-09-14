@@ -1,5 +1,9 @@
-# Open Source Intelligence Profile Deviser
-Python Web Scrapper that creates a profile on an individual based on their web footprint.
+# Open Source Intelligence Profiler
+Created By: Brad Voris
+Requirements: requests, types-requests, & BeautifulSoup4 <BR />
+Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gather to generate a list and
+scrape specific websites to gather additional information about the target. This is a reconnaissance that can be used by red teams to help facilitate pentration testing through social engineering.<BR />
+
 
 # OSINTProfiler To Do list
 - [x] Develop user input
