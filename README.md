@@ -1,5 +1,5 @@
 # Open Source Intelligence Profiler {STILL IN DEVELOPMENT 9-2022}
-Created By: Brad Voris
+Created By: Brad Voris <BR />
 Requirements: requests, types-requests, & BeautifulSoup4 <BR />
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gather to generate a list and
 scrape specific websites to gather additional information about the target. This is a reconnaissance that can be used by red teams to help facilitate pentration testing through social engineering.<BR />
