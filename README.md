@@ -4,8 +4,8 @@ Python Web Scrapper that creates a profile on an individual based on their web f
 # OSINTProfiler To Do list
 - [x] Develop user input
 - [x] Generate links
-- [ ] User Menu System
-- [ ] webscrap generated links
+- [X] User Menu System
+- [X] weblinks generated
 - [ ] generate html profile
 - [ ] Review feature requests
 
