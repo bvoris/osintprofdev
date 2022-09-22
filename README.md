@@ -11,7 +11,8 @@ scrape specific websites to gather additional information about the target. This
 - [X] User Menu System
 - [X] web links generated
 - [X] generate onscreen report
-- [x] generate html profile {This does create a file but is barely functional}
+- [.] generate html profile {This does create a file but is barely functional}
+- [ ] Add Input Validation 
 - [ ] Review feature requests
 
 
