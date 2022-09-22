@@ -14,6 +14,7 @@ scrape specific websites to gather additional information about the target. This
 - [ ] generate html profile {This does create a file but is barely functional}
 - [ ] Add Input Validation (check formats on email address, phone number, etc.)
 - [ ] Add auto-state abbreviation feature
+- [ ] country coding
 - [ ] Review feature requests
 
 
