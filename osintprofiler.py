@@ -8,6 +8,8 @@
 
 # Import Section
 import requests
+import cloudscraper
+from bs4 import BeautifulSoup
 
 # Title and Disclaimer
 titlescreen = """
@@ -41,7 +43,14 @@ menu = """
 """
 
 # HTML Out preloaded variable
-htmlout = ''
+datalisthtmlout = ''
+phonedatalisthtmlout = ''
+emaildatalisthtmlout = ''
+
+# Security Evasion techniques for Requests should be here
+headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36","Upgrade-Insecure-Requests": "1", "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8", "Accept-Encoding": "gzip, deflate", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"}
+cookies = {'cookies_are': 'nom nom nom so good'}
+#, proxies={'http': proxy,'https': proxy})
 
 # Application Section
 print(titlescreen)
@@ -62,6 +71,7 @@ while not done:
         done == True
         break
     elif selection == "1":
+        
 # End user instructions
         print("Input Target Profile Information")
         print("Instructions: Lets gather some information about your target.")
@@ -69,6 +79,7 @@ while not done:
         print("Phone number should be formatted as 555-555-5555")
         print("Email Address should be formatted as name@website.com")
         print()
+        
 # These are the variables that are input from the end user
         firstname = input("What is the target's first name? ")
         print()
@@ -86,8 +97,7 @@ while not done:
             print()
         else:
             state = "none"
-            stateabbr = "none"
-            
+            stateabbr = "none"            
         citya = input("What is the target's city? ")
         city = citya.replace(" ", "")
         print()
@@ -108,12 +118,20 @@ while not done:
         searchpeoplefree = str(f'https://www.searchpeoplefree.com/find/{MergedName}/{stateabbr}/{city}')
         unmask = str(f'https://unmask.com/searching/?aid=25&firstName={firstname}&lastName={lastname}&city={city}&state={stateabbr}')
         peekyou = str(f'https://www.peekyou.com/{firstname}_{lastname}')
+        zabasearch = str(f'https://www.zabasearch.com/people/{firstname}+{lastname}/{city}+{stateabbr}/')
+        intelius = str(f'https://www.intelius.com/search/?firstName={firstname}&lastName={lastname}&city={city}&state={stateabbr}')
+        fastpeoplesearch = str(f'https://www.fastpeoplesearch.com/name/{firstname}-{lastname}_{city}-{state}')
+        phonelookup = str(f'https://www.phonelookup.com/1/{phonenumber}')
+        reversephonewhitepages = str(f'https://www.whitepages.com/phone/1-{phonenumber}')
         
 # This is the list used to generate onscreen lists and reports
-        datalist = [truepeople, usphonebook, findpeoplefast, publicdatausa, spokeo, peoplefinders, whitepages, searchpeoplefree, unmask, peekyou]
+        datalist = [truepeople, usphonebook, findpeoplefast, publicdatausa, spokeo, peoplefinders, whitepages, searchpeoplefree, unmask, peekyou, zabasearch, intelius, fastpeoplesearch]
+        phonedatalist = [phonelookup, reversephonewhitepages]
+        
         print()
         input("Press Enter to return to the menu...")
     elif selection == "2":
+# This Displays the Target Profile Information from User Input
         print("Display Target Profile Information")
         print()
         print(f'Target Name: {firstname} {lastname}')
@@ -131,25 +149,33 @@ while not done:
         input("Press Enter to return to the menu...")
     elif selection == "4":
         print("Generate Target Profile Reports")
-# For loop for gathering data from URLs in the dictionary
+# For loop for gathering PII data from URLs in the dictionary
         for url in datalist:
-# Security Evasion techniques for Requests should be here
-            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36","Upgrade-Insecure-Requests": "1", "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8", "Accept-Encoding": "gzip, deflate", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"}
-            cookies = {'cookies_are': 'nom nom nom so good'}
-            #proxy = ''
-            page = requests.get(url, headers=headers, cookies=cookies)#, proxies={'http': proxy,'https': proxy})
-# Exported Data from website parsing, appended to htmlout as a very large string, to be passed in func.write statement
-            htmlout += str(page.text)
+            page = requests.get(url, headers=headers, cookies=cookies)
+# Exported Data from website parsing, appended to datalisthtmlout as a very large string, to be passed in func.write statement
+            datalisthtmlout += str(page.text)
 # Creating an HTML file
         Func = open("userreport.html","w", encoding="utf-8")
 # Adding input data to the HTML file & Saving the data into the HTML file
-        Func.write(f'<html><head><title>OSINTProfiler Report</title></head> <body><h1>OSINTProfile - Open Source Intelligence Profiler Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{usphonebook}" target="_blank" rel="noopener noreferrer">{usphonebook}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{whitepages}" target="_blank" rel="noopener noreferrer">{whitepages}</A></li><li><a href="{searchpeoplefree}" target="_blank" rel="noopener noreferrer">{searchpeoplefree}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li></ul><BR/>{htmlout}</body></html>')
+# The override.css file is added to bypass additional CSS dumped from web scrape
+        Func.write(f'<html><head><title>OSINTProfiler Report</title><STYLE><link rel="stylesheet" href="override.css"></STYLE></head><body><h1>OSINTProfiler - Open Source Intelligence Profiler: Target Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{usphonebook}" target="_blank" rel="noopener noreferrer">{usphonebook}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{whitepages}" target="_blank" rel="noopener noreferrer">{whitepages}</A></li><li><a href="{searchpeoplefree}" target="_blank" rel="noopener noreferrer">{searchpeoplefree}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li><li><a href="{zabasearch}" target="_blank" rel="noopener noreferrer">{zabasearch}</A></li><li><a href="{intelius}" target="_blank" rel="noopener noreferrer">{intelius}</A></li><li><a href="{fastpeoplesearch}" target="_blank" rel="noopener noreferrer">{fastpeoplesearch}</A></li></ul><BR />Phone Report: <a href="phonereport.html" target="_blank" rel="noopener noreferrer">Click here for phone report</a><BR/>{datalisthtmlout}</body></html>')
 # Closing the file
         Func.close()
         print()
-        input("Press Enter to return to the menu...")
+# For loop for gathering data from Phone number URLs in the dictionary
+        for url in phonedatalist:
+            page = requests.get(url, headers=headers, cookies=cookies)
+# Exported Data from website parsing, appended to phonedatalisthtmlout as a very large string, to be passed in func.write statement
+            phonedatalisthtmlout += str(page.text)
+# Creating an HTML file for phone report
+        Func = open("phonereport.html","w", encoding="utf-8")
+# Adding input data to the HTML file & Saving the data into the HTML file
+        Func.write(f'<html><head><title>OSINTProfiler Report</title></head> <body><h1>OSINTProfile - Open Source Intelligence Profiler: Phone Number Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Phone Lookup Dictionary</B><BR/><UL><li><a href="{phonelookup}" target="_blank" rel="noopener noreferrer">{phonelookup}</a></li><li><a href="{reversephonewhitepages}" target="_blank" rel="noopener noreferrer">{reversephonewhitepages}</a></li><BR/>{phonedatalisthtmlout}</body></html>')
+# Closing the file
+        Func.close() 
+        input("Press Enter to return to the menu...")               
     else:
-        print("Please select 0, 1, 2, or 3")
+        print("Please select 0, 1, 2, 3, or 4... ")
 
 print("Closing OSINTProfiler...")
 
