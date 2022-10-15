@@ -8,7 +8,7 @@
 
 # Import Section
 import requests
-from bs4 import BeautifulSoup
+
 # Title and Disclaimer
 titlescreen = """
 ..#######...######..####.##....##.########.########..########...#######..########.####.##.......########.########.
@@ -20,14 +20,17 @@ titlescreen = """
 ..#######...######..####.##....##....##....##........##.....##..#######..##.......####.########.########.##.....##
 BY: BRAD VORIS
 """
+
 disclaimer ="""
 I am not responsible for how you use the information gathered from OSINTPROFILER. Use this tool responsibly.
 """
+
 # Description
 description = """
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
 scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.
 """
+
 # Menu based interface
 menu = """
 0: Exit
@@ -36,7 +39,8 @@ menu = """
 3: Display Generated Profile Links
 4: Generate Target Profile Reports
 """
-# HTML Out variable
+
+# HTML Out preloaded variable
 htmlout = ''
 
 # Application Section
@@ -47,6 +51,7 @@ print()
 print(description)
 print()
 input("Press enter to continue...")
+
 # While loop that runs the menu and application
 done = False
 while not done:
@@ -91,8 +96,8 @@ while not done:
         emailaddress = input("What is the target's email address? ")
         print()
         MergedName = firstname + '-' + lastname
-# These are the variables scoped for scrapping sites of PII
-# Data sources
+
+# Data sources that pass the variables from user input
         truepeople = str(f'https://www.truepeoplesearch.com/results?name={firstname}%20{lastname}&citystatezip={state}')
         usphonebook = str(f'https://www.usphonebook.com/{MergedName}')
         findpeoplefast = str(f'https://findpeoplefast.net/people/{MergedName}/{stateabbr}')
@@ -103,7 +108,8 @@ while not done:
         searchpeoplefree = str(f'https://www.searchpeoplefree.com/find/{MergedName}/{stateabbr}/{city}')
         unmask = str(f'https://unmask.com/searching/?aid=25&firstName={firstname}&lastName={lastname}&city={city}&state={stateabbr}')
         peekyou = str(f'https://www.peekyou.com/{firstname}_{lastname}')
-# This is the python data list used to generate onscreen lists and reports
+        
+# This is the list used to generate onscreen lists and reports
         datalist = [truepeople, usphonebook, findpeoplefast, publicdatausa, spokeo, peoplefinders, whitepages, searchpeoplefree, unmask, peekyou]
         print()
         input("Press Enter to return to the menu...")
@@ -125,20 +131,21 @@ while not done:
         input("Press Enter to return to the menu...")
     elif selection == "4":
         print("Generate Target Profile Reports")
-        # For loop for gathering data from URLs in the dictionary
+# For loop for gathering data from URLs in the dictionary
         for url in datalist:
-            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36","Upgrade-Insecure-Requests": "1", "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8", "Accept-Encoding": "gzip, deflate", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"}            
-            page = requests.get(url, headers=headers)#, proxies={'http': proxy,'https': proxy})
-            #pageout = page.text
+# Security Evasion techniques for Requests should be here
+            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36","Upgrade-Insecure-Requests": "1", "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8", "Accept-Encoding": "gzip, deflate", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"}
+            cookies = {'cookies_are': 'nom nom nom so good'}
+            #proxy = ''
+            page = requests.get(url, headers=headers, cookies=cookies)#, proxies={'http': proxy,'https': proxy})
+# Exported Data from website parsing, appended to htmlout as a very large string, to be passed in func.write statement
             htmlout += str(page.text)
-            # Creating an HTML file
+# Creating an HTML file
         Func = open("userreport.html","w", encoding="utf-8")
 # Adding input data to the HTML file & Saving the data into the HTML file
         Func.write(f'<html><head><title>OSINTProfiler Report</title></head> <body><h1>OSINTProfile - Open Source Intelligence Profiler Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{usphonebook}" target="_blank" rel="noopener noreferrer">{usphonebook}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{whitepages}" target="_blank" rel="noopener noreferrer">{whitepages}</A></li><li><a href="{searchpeoplefree}" target="_blank" rel="noopener noreferrer">{searchpeoplefree}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li></ul><BR/>{htmlout}</body></html>')
 # Closing the file
         Func.close()
-            #soup = BeautifulSoup(response.text, 'html.parser')
-            #print(soup.text)
         print()
         input("Press Enter to return to the menu...")
     else:
