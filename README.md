@@ -25,7 +25,7 @@ scrape specific websites to gather additional information about the target. This
 
 # Application
 Main Menu <BR />
-<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Menu.jpg" WIDTH=10% HEIGHT=10% ALIGN=LEFT></a><BR />
+<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Menu.jpg" WIDTH=75% HEIGHT=75% ALIGN=LEFT></a><BR />
 
 <BR /><BR />
 ## Connect with me at
