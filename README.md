@@ -2,7 +2,6 @@
 Created By:Brad Voris <BR />
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
 scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.<BR />
-
 <img alt="GitHub followers" src="https://img.shields.io/github/followers/bvoris?style=social">
 <img alt="GitHub User's stars" src="https://img.shields.io/github/stars/bvoris?style=social">
 <img alt="GitHub" src="https://img.shields.io/github/license/bvoris/osintprofdev">
