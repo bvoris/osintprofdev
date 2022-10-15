@@ -49,8 +49,9 @@ OSINTProfile Generated Report<BR />
 # Application Usage
 1) Run the OSINTProfiler.py<BR />
 2) Push 1 and enter<BR />
-3) Input target information<BR />
-4) 
+3) Input target information and push enter<BR />
+4) Push 4 and enter<BR />
+5) Open the userreport.html to view target report
 
 <BR /><BR />
 ## Connect with me at
