@@ -47,6 +47,10 @@ OSINTProfile Generated Report<BR />
 <IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Report%20Results.jpg" WIDTH=75% HEIGHT=75%></a><BR />
 
 # Application Usage
+1) Run the OSINTProfiler.py<BR />
+2) Push 1 and enter<BR />
+3) Input target information<BR />
+4) 
 
 <BR /><BR />
 ## Connect with me at
