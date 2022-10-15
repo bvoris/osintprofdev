@@ -36,6 +36,8 @@ menu = """
 3: Display Generated Profile Links
 4: Generate Target Profile Reports
 """
+# HTML Out variable
+htmlout = ''
 
 # Application Section
 print(titlescreen)
@@ -44,7 +46,7 @@ print(disclaimer)
 print()
 print(description)
 print()
-input()
+input("Press enter to continue...")
 # While loop that runs the menu and application
 done = False
 while not done:
@@ -58,18 +60,36 @@ while not done:
 # End user instructions
         print("Input Target Profile Information")
         print("Instructions: Lets gather some information about your target.")
-        print("First name, last name, state, and state abbreviation should be lower case, do not include spaces.")
+        print("First name, last name, state, and state abbreviation should be lower case.")
         print("Phone number should be formatted as 555-555-5555")
         print("Email Address should be formatted as name@website.com")
         print()
 # These are the variables that are input from the end user
         firstname = input("What is the target's first name? ")
+        print()
         lastname = input("What is the target's last/surname? ")
-        state =  input("What is the target's state? ")
-        stateabbr = input("What is the target's state abbreviation? ")
-        city = input("What is the target's city? ")
+        print()
+        countrya = input("What country is the target in? Enter 'usa' for United States:  ")
+        country = countrya.replace(" ", "")
+        print()
+        if country == "usa":
+            statea =  input("What is the target's state? ")
+            state = statea.replace(" ", "")
+            print()
+            stateabbra = input("What is the target's state abbreviation? ")
+            stateabbr = stateabbra.replace(" ", "")
+            print()
+        else:
+            state = "none"
+            stateabbr = "none"
+            
+        citya = input("What is the target's city? ")
+        city = citya.replace(" ", "")
+        print()
         phonenumber = input("What is the target's phone number? ")
-        emailaddress = input("What is the  target's email address? ")
+        print()
+        emailaddress = input("What is the target's email address? ")
+        print()
         MergedName = firstname + '-' + lastname
 # These are the variables scoped for scrapping sites of PII
 # Data sources
@@ -81,7 +101,7 @@ while not done:
         peoplefinders = str(f'https://www.peoplefinders.com/people/{MergedName}/{stateabbr}?landing=people')
         whitepages = str(f'https://www.whitepages.com/name/{MergedName}/{stateabbr}?fs=1&searchedName={firstname}%20{lastname}&searchedLocation={state}')
         searchpeoplefree = str(f'https://www.searchpeoplefree.com/find/{MergedName}/{stateabbr}/{city}')
-        unmask = str(f'https://unmask.com/searching/?aid=25&firstName={firstname}&lastName={lastname}&city={city}&state=stateabbr')
+        unmask = str(f'https://unmask.com/searching/?aid=25&firstName={firstname}&lastName={lastname}&city={city}&state={stateabbr}')
         peekyou = str(f'https://www.peekyou.com/{firstname}_{lastname}')
 # This is the python data list used to generate onscreen lists and reports
         datalist = [truepeople, usphonebook, findpeoplefast, publicdatausa, spokeo, peoplefinders, whitepages, searchpeoplefree, unmask, peekyou]
@@ -105,15 +125,18 @@ while not done:
         input("Press Enter to return to the menu...")
     elif selection == "4":
         print("Generate Target Profile Reports")
+        # For loop for gathering data from URLs in the dictionary
         for url in datalist:
-            page = requests.get(url)
-            print(page.text)
+            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36","Upgrade-Insecure-Requests": "1", "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8", "Accept-Encoding": "gzip, deflate", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"}            
+            page = requests.get(url, headers=headers)#, proxies={'http': proxy,'https': proxy})
+            #pageout = page.text
+            htmlout += str(page.text)
             # Creating an HTML file
-            Func = open("userreport.html","w", encoding="utf-8")
-# Adding input data to the HTML file
-            Func.write(f'<html>\n<head>\n<title>OSINTProfiler Report</title>\n</head> <body><h1>OSINTProfile - Open Source Intelligence Profiler Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{usphonebook}" target="_blank" rel="noopener noreferrer">{usphonebook}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{whitepages}" target="_blank" rel="noopener noreferrer">{whitepages}</A></li><li><a href="{searchpeoplefree}" target="_blank" rel="noopener noreferrer">{searchpeoplefree}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li></ul><BR/>\\n {page.text} \n</body></html>')
-# Saving the data into the HTML file
-            Func.close()
+        Func = open("userreport.html","w", encoding="utf-8")
+# Adding input data to the HTML file & Saving the data into the HTML file
+        Func.write(f'<html><head><title>OSINTProfiler Report</title></head> <body><h1>OSINTProfile - Open Source Intelligence Profiler Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{usphonebook}" target="_blank" rel="noopener noreferrer">{usphonebook}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{whitepages}" target="_blank" rel="noopener noreferrer">{whitepages}</A></li><li><a href="{searchpeoplefree}" target="_blank" rel="noopener noreferrer">{searchpeoplefree}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li></ul><BR/>{htmlout}</body></html>')
+# Closing the file
+        Func.close()
             #soup = BeautifulSoup(response.text, 'html.parser')
             #print(soup.text)
         print()
