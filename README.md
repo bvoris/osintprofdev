@@ -1,4 +1,4 @@
-# Open Source Intelligence Profiler {STILL IN DEVELOPMENT 10-2022}
+# Open Source Intelligence Profiler
 Created By:Brad Voris <BR />
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
 scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.<BR /><BR />
@@ -45,6 +45,8 @@ Link Display (links will change as websites change, so this will be updated ever
 <IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Link%20Display.jpg" WIDTH=75% HEIGHT=75%></a><BR />
 OSINTProfile Generated Report<BR />
 <IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Report%20Results.jpg" WIDTH=75% HEIGHT=75%></a><BR />
+
+# Application Usage
 
 <BR /><BR />
 ## Connect with me at
