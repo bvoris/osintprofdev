@@ -12,6 +12,13 @@ scrape specific websites to gather additional information about the target. This
 <img alt="GitHub issues" src="https://img.shields.io/github/issues/bvoris/osintprofdev">
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/bvoris/osintprofdev">
 
+# Installation Requirements:
+Python 3.x<BR />
+Requests Module<BR />
+Types-requests Module<BR />
+BeautifulSoup Module<BR />
+CloudScraper Module <BR />
+
 # OSINTProfiler To Do list
 - [x] Develop user input
 - [x] Generate links
@@ -26,13 +33,6 @@ scrape specific websites to gather additional information about the target. This
 - [ ] country coding
 - [ ] Add evasion capabilities (proxies, user-agents, cloudflare bypass with cloudscraper, etc....) **partially enabled**
 - [ ] Review feature requests
-
-# Installation Requirements:
-Python 3.x<BR />
-Requests Module<BR />
-Types-requests Module<BR />
-BeautifulSoup Module<BR />
-CloudScraper Module <BR />
 
 # Application Screenshots
 Main Menu <BR />
