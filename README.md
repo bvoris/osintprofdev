@@ -29,10 +29,10 @@ scrape specific websites to gather additional information about the target. This
 
 # Installation Requirements:
 Python 3.x<BR />
-Requests Module
-Types-requests Module
-BeautifulSoup Module
-CloudScraper Module 
+Requests Module<BR />
+Types-requests Module<BR />
+BeautifulSoup Module<BR />
+CloudScraper Module <BR />
 
 # Application Screenshots
 Main Menu <BR />
