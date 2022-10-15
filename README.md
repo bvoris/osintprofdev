@@ -19,11 +19,12 @@ scrape specific websites to gather additional information about the target. This
 - [ ] Add evasion capabilities (proxies, user-agents, etc....) (partially enabled)
 - [ ] Review feature requests
 
+# Installation Requirements:
+Python 3.x<BR />
+Requests Module
+BS4 Module
 
-
-# This is currently in development and the source is not complete
-
-# Application
+# Application Screenshots
 Main Menu <BR />
 <IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Menu.jpg" WIDTH=75% HEIGHT=75%></a><BR />
 Collector (User Input) <BR />
