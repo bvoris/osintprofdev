@@ -4,7 +4,7 @@ Description: This tool gathers information from the end user about a specific ta
 scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.<BR />
 
 <img alt="GitHub followers" src="https://img.shields.io/github/followers/bvoris?style=social">
-<img alt="GitHub User's stars" src="https://img.shields.io/github/stars/bvoris?style=social"><BR />
+<img alt="GitHub User's stars" src="https://img.shields.io/github/stars/bvoris?style=social">
 <img alt="GitHub" src="https://img.shields.io/github/license/bvoris/osintprofdev">
 <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/bvoris/osintprofdev">
 <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/bvoris/osintprofdev/total">
