@@ -25,15 +25,15 @@ scrape specific websites to gather additional information about the target. This
 
 # Application
 Main Menu <BR />
-<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Menu.jpg" WIDTH=75% HEIGHT=75% ALIGN=LEFT></a><BR />
+<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Menu.jpg" WIDTH=75% HEIGHT=75%></a><BR />
 Collector (User Input) <BR />
-<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20collector.jpg" WIDTH=75% HEIGHT=75% ALIGN=LEFT></a><BR />
+<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20collector.jpg" WIDTH=75% HEIGHT=75%></a><BR />
 Target Display<BR />
-<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Target%20Display.jpg" WIDTH=75% HEIGHT=75% ALIGN=LEFT></a><BR />
+<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Target%20Display.jpg" WIDTH=75% HEIGHT=75%></a><BR />
 Link Display (links will change as websites change, so this will be updated every few months)<BR />
-<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Link%20Display.jpg" WIDTH=75% HEIGHT=75% ALIGN=LEFT></a><BR />
+<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Link%20Display.jpg" WIDTH=75% HEIGHT=75%></a><BR />
 OSINTProfile Generated Report<BR />
-<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Report%20Results.jpg" WIDTH=75% HEIGHT=75% ALIGN=LEFT></a><BR />
+<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/OSINTProfiler%20Report%20Results.jpg" WIDTH=75% HEIGHT=75%></a><BR />
 
 <BR /><BR />
 ## Connect with me at
