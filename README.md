@@ -12,11 +12,11 @@ scrape specific websites to gather additional information about the target. This
 - [X] web links generated
 - [X] generate onscreen report
 - [ ] convert list to separate module
-- [X] generate html profile {This does create a file but is barely functional}
-- [ ] Add Input Validation (check formats on email address, phone number, etc.)
+- [X] generate html profile
+- [ ] Add Input Validation (check formats on email address, phone number, etc.) **partially enabled**
 - [ ] Add auto-state abbreviation feature
 - [ ] country coding
-- [ ] Add evasion capabilities (proxies, user-agents, etc....) (partially enabled)
+- [ ] Add evasion capabilities (proxies, user-agents, etc....) **partially enabled**
 - [ ] Review feature requests
 
 # Installation Requirements:
