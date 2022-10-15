@@ -11,8 +11,9 @@ scrape specific websites to gather additional information about the target. This
 - [X] User Menu System
 - [X] web links generated
 - [X] generate onscreen report
+- [X] generate html profile repot
+- [X] generate html phone report
 - [ ] convert list to separate module
-- [X] generate html profile
 - [ ] Add Input Validation (check formats on email address, phone number, etc.) **partially enabled**
 - [ ] Add auto-state abbreviation feature
 - [ ] country coding
@@ -22,6 +23,9 @@ scrape specific websites to gather additional information about the target. This
 # Installation Requirements:
 Python 3.x<BR />
 Requests Module
+Types-requests Module
+BeautifulSoup Module
+CloudScraper Module 
 
 # Application Screenshots
 Main Menu <BR />
