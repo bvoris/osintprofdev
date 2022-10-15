@@ -22,7 +22,6 @@ scrape specific websites to gather additional information about the target. This
 # Installation Requirements:
 Python 3.x<BR />
 Requests Module
-BS4 Module
 
 # Application Screenshots
 Main Menu <BR />
