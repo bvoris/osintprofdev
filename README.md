@@ -17,7 +17,7 @@ scrape specific websites to gather additional information about the target. This
 - [ ] Add Input Validation (check formats on email address, phone number, etc.) **partially enabled**
 - [ ] Add auto-state abbreviation feature
 - [ ] country coding
-- [ ] Add evasion capabilities (proxies, user-agents, etc....) **partially enabled**
+- [ ] Add evasion capabilities (proxies, user-agents, cloudflare bypass with cloudscraper, etc....) **partially enabled**
 - [ ] Review feature requests
 
 # Installation Requirements:
