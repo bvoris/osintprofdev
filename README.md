@@ -1,3 +1,4 @@
+<IMG SRC="https://github.com/bvoris/osintprofdev/blob/main/screenshots/logo.jpg" WIDTH=75% HEIGHT=75% ALIGN=CENTER></a><BR />
 # Open Source Intelligence Profiler
 Created By:Brad Voris <BR />
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
