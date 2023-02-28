@@ -1,6 +1,7 @@
 # OSINTProfiler - Open Source Intelligence Profiler
 # Created By: Brad Voris
-# Version: 0.05
+# Version: 0.06
+# Date Modified 2/28/2023
 # Requirements: requests, types-requests, & BeautifulSoup4 
 # Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
 # scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.
@@ -20,6 +21,7 @@ titlescreen = """
 .##.....##.......##..##..##..####....##....##........##...##...##.....##.##........##..##.......##.......##...##..
 .##.....##.##....##..##..##...###....##....##........##....##..##.....##.##........##..##.......##.......##....##.
 ..#######...######..####.##....##....##....##........##.....##..#######..##.......####.########.########.##.....##
+Version: 0.06
 BY: BRAD VORIS
 """
 
@@ -46,6 +48,7 @@ menu = """
 datalisthtmlout = ''
 phonedatalisthtmlout = ''
 emaildatalisthtmlout = ''
+soup = ''
 
 # Security Evasion techniques for Requests should be here
 headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36","Upgrade-Insecure-Requests": "1", "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8", "Accept-Encoding": "gzip, deflate", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"}
@@ -127,10 +130,10 @@ while not done:
 # This is the list used to generate onscreen lists and reports
         datalist = [truepeople, usphonebook, findpeoplefast, publicdatausa, spokeo, peoplefinders, whitepages, searchpeoplefree, unmask, peekyou, zabasearch, intelius, fastpeoplesearch]
         phonedatalist = [phonelookup, reversephonewhitepages]
-        
         print()
         input("Press Enter to return to the menu...")
     elif selection == "2":
+    
 # This Displays the Target Profile Information from User Input
         print("Display Target Profile Information")
         print()
@@ -159,9 +162,63 @@ while not done:
 # Adding input data to the HTML file & Saving the data into the HTML file
 # The override.css file is added to bypass additional CSS dumped from web scrape
         Func.write(f'<html><head><title>OSINTProfiler Report</title><STYLE><link rel="stylesheet" href="override.css"></STYLE></head><body><h1>OSINTProfiler - Open Source Intelligence Profiler: Target Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{usphonebook}" target="_blank" rel="noopener noreferrer">{usphonebook}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{whitepages}" target="_blank" rel="noopener noreferrer">{whitepages}</A></li><li><a href="{searchpeoplefree}" target="_blank" rel="noopener noreferrer">{searchpeoplefree}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li><li><a href="{zabasearch}" target="_blank" rel="noopener noreferrer">{zabasearch}</A></li><li><a href="{intelius}" target="_blank" rel="noopener noreferrer">{intelius}</A></li><li><a href="{fastpeoplesearch}" target="_blank" rel="noopener noreferrer">{fastpeoplesearch}</A></li></ul><BR />Phone Report: <a href="phonereport.html" target="_blank" rel="noopener noreferrer">Click here for phone report</a><BR/>{datalisthtmlout}</body></html>')
+
 # Closing the file
         Func.close()
+        
+# Clean up files with BeautifulSoup
+        from bs4 import BeautifulSoup
+
+# Open the HTML file and read it into a string
+        with open('userreport.html', encoding="utf-8") as f:
+            html_doc = f.read()
+
+# Parse the HTML document
+        soup = BeautifulSoup(html_doc, 'html.parser')
+###### Cleans up all the unneded tags from web scraping on the local file (faster than doing it inline / online
+# Remove all <script> tags
+        for script in soup.find_all('script'):
+            script.extract()
+
+# Remove all <style> tags
+        for style in soup.find_all('style'):
+            style.extract()
+
+# Remove all <img> tags
+        for img in soup.find_all('img'):
+            img.extract()
+
+# Remove all <path> tags
+        for path in soup.find_all('path'):
+            path.extract()
+
+# Remove all <svg> tags
+        for svg in soup.find_all('svg'):
+            svg.extract()
+            
+# Remove all <button> tags
+        for button in soup.find_all('button'):
+            button.extract()
+
+# Remove all <meta> tags
+        for meta in soup.find_all('meta'):
+            meta.extract()
+            
+# Remove all <figure> tags
+        for figure in soup.find_all('figure'):
+            figure.extract()
+
+# Remove all <input> tags
+        for inputtags in soup.find_all('input'):
+            inputtags.extract()
+
+# Write the modified HTML back to the file
+        with open('userreport.html', 'w') as f:
+            f.write(soup.prettify())
+
+# Print Return
         print()
+        
 # For loop for gathering data from Phone number URLs in the dictionary
         for url in phonedatalist:
             page = requests.get(url, headers=headers, cookies=cookies)
@@ -178,7 +235,3 @@ while not done:
         print("Please select 0, 1, 2, 3, or 4... ")
 
 print("Closing OSINTProfiler...")
-
-
-
-
