@@ -175,7 +175,7 @@ while not done:
 
 # Parse the HTML document
         soup = BeautifulSoup(html_doc, 'html.parser')
-###### Cleans up all the unneded tags from web scraping on the local file (faster than doing it inline / online
+###### Cleans up all the unneeded tags from web scraping on the local file (faster than doing it inline / online
 # Remove all <script> tags
         for script in soup.find_all('script'):
             script.extract()
