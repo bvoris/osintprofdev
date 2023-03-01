@@ -28,6 +28,7 @@ CloudScraper Module <BR />
 - [X] generate onscreen report
 - [X] generate html profile repot
 - [X] generate html phone report
+- [X] Clean up unneeded web scrapped tags from report
 - [ ] convert list to separate module
 - [ ] Add Input Validation (check formats on email address, phone number, etc.) **partially enabled**
 - [ ] Add auto-state abbreviation feature
