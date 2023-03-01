@@ -29,11 +29,11 @@ CloudScraper Module <BR />
 - [X] generate html profile repot
 - [X] generate html phone report
 - [X] Clean up unneeded web scrapped tags from report
+- [X] Add evasion capabilities (proxies, user-agents, etc....)
 - [ ] convert list to separate module
 - [ ] Add Input Validation (check formats on email address, phone number, etc.) **partially enabled**
 - [ ] Add auto-state abbreviation feature
 - [ ] country coding
-- [ ] Add evasion capabilities (proxies, user-agents, cloudflare bypass with cloudscraper, etc....) **partially enabled**
 - [ ] Review feature requests
 
 # Application Screenshots
