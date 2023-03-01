@@ -18,7 +18,6 @@ Python 3.x<BR />
 Requests Module<BR />
 Types-requests Module<BR />
 BeautifulSoup Module<BR />
-CloudScraper Module <BR />
 
 # OSINTProfiler To Do list
 - [x] Develop user input
