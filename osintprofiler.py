@@ -1,7 +1,7 @@
 # OSINTProfiler - Open Source Intelligence Profiler
 # Created By: Brad Voris
-# Version: 0.06
-# Date Modified 2/28/2023
+# Version: 0.07
+# Date Modified 3/01/2023
 # Requirements: requests, types-requests, & BeautifulSoup4 
 # Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
 # scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.
@@ -9,7 +9,6 @@
 
 # Import Section
 import requests
-import cloudscraper
 from bs4 import BeautifulSoup
 
 # Title and Disclaimer
@@ -21,7 +20,7 @@ titlescreen = """
 .##.....##.......##..##..##..####....##....##........##...##...##.....##.##........##..##.......##.......##...##..
 .##.....##.##....##..##..##...###....##....##........##....##..##.....##.##........##..##.......##.......##....##.
 ..#######...######..####.##....##....##....##........##.....##..#######..##.......####.########.########.##.....##
-Version: 0.06
+Version: 0.07
 BY: BRAD VORIS
 """
 
@@ -112,23 +111,18 @@ while not done:
 
 # Data sources that pass the variables from user input
         truepeople = str(f'https://www.truepeoplesearch.com/results?name={firstname}%20{lastname}&citystatezip={state}')
-        usphonebook = str(f'https://www.usphonebook.com/{MergedName}')
         findpeoplefast = str(f'https://findpeoplefast.net/people/{MergedName}/{stateabbr}')
         publicdatausa = str(f'https://www.publicdatausa.com/{MergedName}')
         spokeo = str(f'https://www.spokeo.com/{MergedName}?loaded=1')
         peoplefinders = str(f'https://www.peoplefinders.com/people/{MergedName}/{stateabbr}?landing=people')
-        whitepages = str(f'https://www.whitepages.com/name/{MergedName}/{stateabbr}?fs=1&searchedName={firstname}%20{lastname}&searchedLocation={state}')
-        searchpeoplefree = str(f'https://www.searchpeoplefree.com/find/{MergedName}/{stateabbr}/{city}')
         unmask = str(f'https://unmask.com/searching/?aid=25&firstName={firstname}&lastName={lastname}&city={city}&state={stateabbr}')
         peekyou = str(f'https://www.peekyou.com/{firstname}_{lastname}')
         zabasearch = str(f'https://www.zabasearch.com/people/{firstname}+{lastname}/{city}+{stateabbr}/')
-        intelius = str(f'https://www.intelius.com/search/?firstName={firstname}&lastName={lastname}&city={city}&state={stateabbr}')
-        fastpeoplesearch = str(f'https://www.fastpeoplesearch.com/name/{firstname}-{lastname}_{city}-{state}')
         phonelookup = str(f'https://www.phonelookup.com/1/{phonenumber}')
         reversephonewhitepages = str(f'https://www.whitepages.com/phone/1-{phonenumber}')
         
 # This is the list used to generate onscreen lists and reports
-        datalist = [truepeople, usphonebook, findpeoplefast, publicdatausa, spokeo, peoplefinders, whitepages, searchpeoplefree, unmask, peekyou, zabasearch, intelius, fastpeoplesearch]
+        datalist = [truepeople, findpeoplefast, publicdatausa, spokeo, peoplefinders, unmask, peekyou, zabasearch]
         phonedatalist = [phonelookup, reversephonewhitepages]
         print()
         input("Press Enter to return to the menu...")
@@ -162,7 +156,7 @@ while not done:
         Func = open("userreport.html","w", encoding="utf-8")
 # Adding input data to the HTML file & Saving the data into the HTML file
 # The override.css file is added to bypass additional CSS dumped from web scrape
-        Func.write(f'<html><head><title>OSINTProfiler Report</title><STYLE><link rel="stylesheet" href="override.css"></STYLE></head><body><h1>OSINTProfiler - Open Source Intelligence Profiler: Target Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{usphonebook}" target="_blank" rel="noopener noreferrer">{usphonebook}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{whitepages}" target="_blank" rel="noopener noreferrer">{whitepages}</A></li><li><a href="{searchpeoplefree}" target="_blank" rel="noopener noreferrer">{searchpeoplefree}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li><li><a href="{zabasearch}" target="_blank" rel="noopener noreferrer">{zabasearch}</A></li><li><a href="{intelius}" target="_blank" rel="noopener noreferrer">{intelius}</A></li><li><a href="{fastpeoplesearch}" target="_blank" rel="noopener noreferrer">{fastpeoplesearch}</A></li></ul><BR />Phone Report: <a href="phonereport.html" target="_blank" rel="noopener noreferrer">Click here for phone report</a><BR/>{datalisthtmlout}</body></html>')
+        Func.write(f'<html><head><title>OSINTProfiler Report</title><STYLE><link rel="stylesheet" href="override.css"></STYLE></head><body><h1>OSINTProfiler - Open Source Intelligence Profiler: Target Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li><li><a href="{zabasearch}" target="_blank" rel="noopener noreferrer">{zabasearch}</A></li></ul><BR />Phone Report: <a href="phonereport.html" target="_blank" rel="noopener noreferrer">Click here for phone report</a><BR/>{datalisthtmlout}</body></html>')
 
 # Closing the file
         Func.close()
@@ -200,10 +194,6 @@ while not done:
 # Remove all <button> tags
         for button in soup.find_all('button'):
             button.extract()
-
-# Remove all <meta> tags
-        for meta in soup.find_all('meta'):
-            meta.extract()
             
 # Remove all <figure> tags
         for figure in soup.find_all('figure'):
@@ -212,7 +202,27 @@ while not done:
 # Remove all <input> tags
         for inputtags in soup.find_all('input'):
             inputtags.extract()
+            
+# Remove all <span> tags
+        for span in soup.find_all('span'):
+            span.extract()
 
+# Remove all <noscript> tags
+        for noscript in soup.find_all('noscript'):
+            noscript.extract()
+            
+# Remove all <form> tags
+        for form in soup.find_all('form'):
+            form.extract()
+
+# Remove all <select> tags
+        for select in soup.find_all('select'):
+            select.extract()
+
+# Remove all <link> tags
+        for link in soup.find_all('link'):
+            link.extract()
+            
 # Write the modified HTML back to the file
         with open('userreport.html', 'w') as f:
             f.write(soup.prettify())
