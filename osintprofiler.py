@@ -151,7 +151,8 @@ while not done:
         print()
         input("Press Enter to return to the menu...")
     elif selection == "4":
-        print("Generate Target Profile Reports")
+        print("Generating Target Profile Reports...")
+        print("This could take awhile...")
 # For loop for gathering PII data from URLs in the dictionary
         for url in datalist:
             page = requests.get(url, headers=headers, cookies=cookies)
@@ -235,3 +236,7 @@ while not done:
         print("Please select 0, 1, 2, 3, or 4... ")
 
 print("Closing OSINTProfiler...")
+
+
+
+
