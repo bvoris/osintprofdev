@@ -54,6 +54,14 @@ menu = """
 4: Generate Target Profile Reports
 """
 
+# Predifining Input Variables
+firstname = ""
+lastname = ""
+city = ""
+state = ""
+phonenumber = ""
+emailaddress = ""
+
 # HTML Out preloaded variable
 datalisthtmlout = ''
 phonedatalisthtmlout = ''
@@ -125,27 +133,30 @@ while not done:
         datalist = [truepeople, findpeoplefast, publicdatausa, spokeo, peoplefinders, unmask, peekyou, zabasearch]
         phonedatalist = [phonelookup, reversephonewhitepages]
         input("\nPress Enter to return to the menu...")
+
     elif selection == "2":
-    
+
 # This Displays the Target Profile Information from User Input
+        comma = ""
+        if state:
+            comma = ","
         print("Display Target Profile Information")
-        print()
-        print(f'Target Name: {firstname} {lastname}')
-        print(f'Target Location: {city},{state}')
+        print(f'\nTarget Name: {firstname} {lastname}')
+        print(f'Target Location: {city} {comma} {state}')
         print(f'Target Phone Number: {phonenumber}')
-        print(f'Target Email Address: {emailaddress}')
-        print()
+        print(f'Target Email Address: {emailaddress}\n')
+
         input("Press Enter to return to the menu...")
+
     elif selection == "3":
-        print("Display Links for Profile Reports ")
-        print()
+        print("Display Links for Profile Reports \n")
         for url in datalist:
             print(url)
-        print()
-        input("Press Enter to return to the menu...")
+        input("\nPress Enter to return to the menu...")
+
     elif selection == "4":
         print("Generating Target Profile Reports...")
-        print("This could take awhile...")
+        print("This could take a while...")
 # For loop for gathering PII data from URLs in the dictionary
         for url in datalist:
             page = requests.get(url, headers=headers, cookies=cookies)
@@ -240,9 +251,10 @@ while not done:
         Func.write(f'<html><head><title>OSINTProfiler Report</title></head> <body><h1>OSINTProfile - Open Source Intelligence Profiler: Phone Number Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Phone Lookup Dictionary</B><BR/><UL><li><a href="{phonelookup}" target="_blank" rel="noopener noreferrer">{phonelookup}</a></li><li><a href="{reversephonewhitepages}" target="_blank" rel="noopener noreferrer">{reversephonewhitepages}</a></li><BR/>{phonedatalisthtmlout}</body></html>')
 # Closing the file
         Func.close() 
-        input("Press Enter to return to the menu...")               
+        input("Press Enter to return to the menu...")
+
     else:
-        print("Please select 0, 1, 2, 3, or 4... ")
+        print("Invalid input, select the provided options .... ")
 
 print("Closing OSINTProfiler...")
 
