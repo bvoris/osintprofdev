@@ -54,13 +54,14 @@ menu = """
 4: Generate Target Profile Reports
 """
 
-# Predifining Input Variables
+# Predifining variables
 firstname = ""
 lastname = ""
 city = ""
 state = ""
 phonenumber = ""
 emailaddress = ""
+datalist = []
 
 # HTML Out preloaded variable
 datalisthtmlout = ''
@@ -150,6 +151,8 @@ while not done:
 
     elif selection == "3":
         print("Display Links for Profile Reports \n")
+        if not datalist:
+            print("Links not found .... please check provide more information")
         for url in datalist:
             print(url)
         input("\nPress Enter to return to the menu...")
