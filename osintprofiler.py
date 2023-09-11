@@ -25,7 +25,7 @@ BY: BRAD VORIS
 """
 
 disclaimer ="""
-I am not responsible for how you use the information gathered from OSINTPROFILER. Use this tool responsibly.
+Disclaimer: The author of the project as not responible for any misuse of the gathered information. 
 """
 
 # Description
