@@ -32,17 +32,17 @@ titlescreen = """
 .##.....##.##....##..##..##...###....##....##........##....##..##.....##.##........##..##.......##.......##....##.
 ..#######...######..####.##....##....##....##........##.....##..#######..##.......####.########.########.##.....##
 Version: 0.07
-BY: BRAD VORIS
+BY: BRAD VORIS\n
 """
 
 disclaimer ="""
-Disclaimer: The author of the project as not responible for any misuse of the gathered information. 
+Disclaimer: The author of the project as not responible for any misuse of the gathered information.\n
 """
 
 # Description
 description = """
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
-scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.
+scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.\n
 """
 
 # Menu based interface
@@ -67,11 +67,8 @@ cookies = {'cookies_are': 'nom nom nom so good'}
 
 # Application Section
 print(titlescreen)
-print()
 print(disclaimer)
-print()
 print(description)
-print()
 input("Press enter to continue...")
 
 # While loop that runs the menu and application
