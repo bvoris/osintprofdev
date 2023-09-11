@@ -8,8 +8,19 @@
 #
 
 # Import Section
-import requests
-from bs4 import BeautifulSoup
+
+try:
+        import requests
+        from bs4 import BeautifulSoup
+except ModuleNotFoundError:
+    print("""
+          [-] Required modules are not installed on the system
+          [*] Modules required: requests, bs4
+          
+          Try command: pip install requests && pip install bs4
+          Closing OSINTProfiler...
+          """)
+    exit()
 
 # Title and Disclaimer
 titlescreen = """
