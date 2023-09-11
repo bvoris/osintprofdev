@@ -80,6 +80,13 @@ print(disclaimer)
 print(description)
 input("Press enter to continue...")
 
+# Internal Functions
+
+def check_email(email):
+        if '@' not in email:
+            return False
+        return True
+
 # While loop that runs the menu and application
 done = False
 while not done:
@@ -115,7 +122,14 @@ while not done:
         citya = input("\nWhat is the target's city? ")
         city = citya.replace(" ", "")
         phonenumber = input("\nWhat is the target's phone number? ")
-        emailaddress = input("\nWhat is the target's email address? ")
+
+        correct_address = False
+        while correct_address == False:
+                emailaddress = input("\nWhat is the target's email address? ")
+                if check_email(emailaddress):
+                    break
+                print('\n Invalid email address, please try again .... ')
+
         MergedName = firstname + '-' + lastname
 
 # Data sources that pass the variables from user input
