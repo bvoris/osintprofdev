@@ -8,16 +8,16 @@
 #
 
 # Import Section
-
 try:
         import requests
         from bs4 import BeautifulSoup
+
 except ModuleNotFoundError:
     print("""
-          [-] Required modules are not installed on the system
-          [*] Modules required: requests, bs4
+          Required modules are not installed on the system
+          Modules required: requests, bs4
           
-          Try command: pip install requests && pip install bs4
+          Try command: pip install requests bs4
           Closing OSINTProfiler...
           """)
     exit()
