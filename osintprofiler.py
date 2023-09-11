@@ -87,34 +87,26 @@ while not done:
         print("Instructions: Lets gather some information about your target.")
         print("First name, last name, state, and state abbreviation should be lower case.")
         print("Phone number should be formatted as 555-555-5555")
-        print("Email Address should be formatted as name@website.com")
-        print()
+        print("Email Address should be formatted as name@website.com\n")
         
 # These are the variables that are input from the end user
         firstname = input("What is the target's first name? ")
-        print()
-        lastname = input("What is the target's last/surname? ")
-        print()
-        countrya = input("What country is the target in? Enter 'usa' for United States:  ")
+        lastname = input("\nWhat is the target's last/surname? ")
+        countrya = input("\nWhat country is the target in? Enter 'usa' for United States:  ")
         country = countrya.replace(" ", "")
-        print()
         if country == "usa":
-            statea =  input("What is the target's state? ")
+            statea =  input("\nWhat is the target's state? ")
             state = statea.replace(" ", "")
-            print()
-            stateabbra = input("What is the target's state abbreviation? ")
+            stateabbra = input("\nWhat is the target's state abbreviation? ")
             stateabbr = stateabbra.replace(" ", "")
-            print()
         else:
             state = "none"
-            stateabbr = "none"            
-        citya = input("What is the target's city? ")
+            stateabbr = "none"
+
+        citya = input("\nWhat is the target's city? ")
         city = citya.replace(" ", "")
-        print()
-        phonenumber = input("What is the target's phone number? ")
-        print()
-        emailaddress = input("What is the target's email address? ")
-        print()
+        phonenumber = input("\nWhat is the target's phone number? ")
+        emailaddress = input("\nWhat is the target's email address? ")
         MergedName = firstname + '-' + lastname
 
 # Data sources that pass the variables from user input
@@ -132,8 +124,7 @@ while not done:
 # This is the list used to generate onscreen lists and reports
         datalist = [truepeople, findpeoplefast, publicdatausa, spokeo, peoplefinders, unmask, peekyou, zabasearch]
         phonedatalist = [phonelookup, reversephonewhitepages]
-        print()
-        input("Press Enter to return to the menu...")
+        input("\nPress Enter to return to the menu...")
     elif selection == "2":
     
 # This Displays the Target Profile Information from User Input
