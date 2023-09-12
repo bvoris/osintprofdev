@@ -80,9 +80,8 @@ print(description)
 input("Press enter to continue...")
 
 # Internal Functions
-
 def check_email(email):
-        if '@' not in email:
+        if '@' and '.' not in email:
             return False
         return True
 
