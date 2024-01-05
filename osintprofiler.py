@@ -1,15 +1,27 @@
 # OSINTProfiler - Open Source Intelligence Profiler
 # Created By: Brad Voris
-# Version: 0.07
-# Date Modified 3/01/2023
+# Updated Code and cleanup BY: PythonHacker24 (Aditya Patil)
+# Version: 0.08
+# Date Modified 1/05/2024
 # Requirements: requests, types-requests, & BeautifulSoup4 
 # Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
 # scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.
 #
 
 # Import Section
-import requests
-from bs4 import BeautifulSoup
+try:
+        import requests
+        from bs4 import BeautifulSoup
+
+except ModuleNotFoundError:
+    print("""
+          Required modules are not installed on the system
+          Modules required: requests, bs4
+          
+          Try command: pip install requests bs4
+          Closing OSINTProfiler...
+          """)
+    exit()
 
 # Title and Disclaimer
 titlescreen = """
@@ -20,18 +32,19 @@ titlescreen = """
 .##.....##.......##..##..##..####....##....##........##...##...##.....##.##........##..##.......##.......##...##..
 .##.....##.##....##..##..##...###....##....##........##....##..##.....##.##........##..##.......##.......##....##.
 ..#######...######..####.##....##....##....##........##.....##..#######..##.......####.########.########.##.....##
-Version: 0.07
-BY: BRAD VORIS
+Version: 0.08
+BY: BRAD VORIS\n
+Updated Code and cleanup BY: PythonHacker24 (Aditya Patil)\n
 """
 
 disclaimer ="""
-I am not responsible for how you use the information gathered from OSINTPROFILER. Use this tool responsibly.
+Disclaimer: The author of the project as not responible for any misuse of the gathered information.\n
 """
 
 # Description
 description = """
 Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
-scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.
+scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.\n
 """
 
 # Menu based interface
@@ -42,6 +55,15 @@ menu = """
 3: Display Generated Profile Links
 4: Generate Target Profile Reports
 """
+
+# Predifining variables
+firstname = ""
+lastname = ""
+city = ""
+state = ""
+phonenumber = ""
+emailaddress = ""
+datalist = []
 
 # HTML Out preloaded variable
 datalisthtmlout = ''
@@ -56,12 +78,16 @@ cookies = {'cookies_are': 'nom nom nom so good'}
 
 # Application Section
 print(titlescreen)
-print()
 print(disclaimer)
-print()
 print(description)
-print()
 input("Press enter to continue...")
+
+# Internal Functions
+
+def check_email(email):
+        if '@' not in email:
+            return False
+        return True
 
 # While loop that runs the menu and application
 done = False
@@ -79,34 +105,33 @@ while not done:
         print("Instructions: Lets gather some information about your target.")
         print("First name, last name, state, and state abbreviation should be lower case.")
         print("Phone number should be formatted as 555-555-5555")
-        print("Email Address should be formatted as name@website.com")
-        print()
+        print("Email Address should be formatted as name@website.com\n")
         
 # These are the variables that are input from the end user
         firstname = input("What is the target's first name? ")
-        print()
-        lastname = input("What is the target's last/surname? ")
-        print()
-        countrya = input("What country is the target in? Enter 'usa' for United States:  ")
+        lastname = input("\nWhat is the target's last/surname? ")
+        countrya = input("\nWhat country is the target in? Enter 'usa' for United States:  ")
         country = countrya.replace(" ", "")
-        print()
         if country == "usa":
-            statea =  input("What is the target's state? ")
+            statea =  input("\nWhat is the target's state? ")
             state = statea.replace(" ", "")
-            print()
-            stateabbra = input("What is the target's state abbreviation? ")
+            stateabbra = input("\nWhat is the target's state abbreviation? ")
             stateabbr = stateabbra.replace(" ", "")
-            print()
         else:
             state = "none"
-            stateabbr = "none"            
-        citya = input("What is the target's city? ")
+            stateabbr = "none"
+
+        citya = input("\nWhat is the target's city? ")
         city = citya.replace(" ", "")
-        print()
-        phonenumber = input("What is the target's phone number? ")
-        print()
-        emailaddress = input("What is the target's email address? ")
-        print()
+        phonenumber = input("\nWhat is the target's phone number? ")
+
+        correct_address = False
+        while correct_address == False:
+                emailaddress = input("\nWhat is the target's email address? ")
+                if check_email(emailaddress):
+                    break
+                print('\n Invalid email address, please try again .... ')
+
         MergedName = firstname + '-' + lastname
 
 # Data sources that pass the variables from user input
@@ -124,29 +149,33 @@ while not done:
 # This is the list used to generate onscreen lists and reports
         datalist = [truepeople, findpeoplefast, publicdatausa, spokeo, peoplefinders, unmask, peekyou, zabasearch]
         phonedatalist = [phonelookup, reversephonewhitepages]
-        print()
-        input("Press Enter to return to the menu...")
+        input("\nPress Enter to return to the menu...")
+
     elif selection == "2":
-    
+
 # This Displays the Target Profile Information from User Input
+        comma = ""
+        if state:
+            comma = ","
         print("Display Target Profile Information")
-        print()
-        print(f'Target Name: {firstname} {lastname}')
-        print(f'Target Location: {city},{state}')
+        print(f'\nTarget Name: {firstname} {lastname}')
+        print(f'Target Location: {city} {comma} {state}')
         print(f'Target Phone Number: {phonenumber}')
-        print(f'Target Email Address: {emailaddress}')
-        print()
+        print(f'Target Email Address: {emailaddress}\n')
+
         input("Press Enter to return to the menu...")
+
     elif selection == "3":
-        print("Display Links for Profile Reports ")
-        print()
+        print("Display Links for Profile Reports \n")
+        if not datalist:
+            print("Links not found .... please check provide more information")
         for url in datalist:
             print(url)
-        print()
-        input("Press Enter to return to the menu...")
+        input("\nPress Enter to return to the menu...")
+
     elif selection == "4":
         print("Generating Target Profile Reports...")
-        print("This could take awhile...")
+        print("This could take a while...")
 # For loop for gathering PII data from URLs in the dictionary
         for url in datalist:
             page = requests.get(url, headers=headers, cookies=cookies)
@@ -241,11 +270,13 @@ while not done:
         Func.write(f'<html><head><title>OSINTProfiler Report</title></head> <body><h1>OSINTProfile - Open Source Intelligence Profiler: Phone Number Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Phone Lookup Dictionary</B><BR/><UL><li><a href="{phonelookup}" target="_blank" rel="noopener noreferrer">{phonelookup}</a></li><li><a href="{reversephonewhitepages}" target="_blank" rel="noopener noreferrer">{reversephonewhitepages}</a></li><BR/>{phonedatalisthtmlout}</body></html>')
 # Closing the file
         Func.close() 
-        input("Press Enter to return to the menu...")               
+        input("Press Enter to return to the menu...")
+
     else:
-        print("Please select 0, 1, 2, 3, or 4... ")
+        print("Invalid input, select the provided options .... ")
 
 print("Closing OSINTProfiler...")
+
 
 
 
