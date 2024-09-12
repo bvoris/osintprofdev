@@ -2,7 +2,7 @@
 # Created By: Brad Voris
 # Updated Code and cleanup BY: PythonHacker24 (Aditya Patil)
 # Version: 0.09
-# Date Modified 9/22/2024
+# Date Modified 9/12/2024
 # Requirements: requests, types-requests, & BeautifulSoup4 
 # Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
 # scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.
