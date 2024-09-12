@@ -29,8 +29,9 @@ BeautifulSoup Module<BR />
 - [X] generate html phone report
 - [X] Clean up unneeded web scrapped tags from report
 - [X] Add evasion capabilities (proxies, user-agents, etc....)
+- [X] Target name added to file name
 - [ ] convert list to separate module
-- [ ] Add Input Validation (check formats on email address, phone number, etc.) **partially enabled**
+- [X] Add Input Validation (check formats on email address, phone number, etc.) **partially enabled**
 - [ ] Add auto-state abbreviation feature
 - [ ] country coding
 - [ ] Review feature requests
