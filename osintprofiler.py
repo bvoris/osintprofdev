@@ -1,8 +1,8 @@
 # OSINTProfiler - Open Source Intelligence Profiler
 # Created By: Brad Voris
 # Updated Code and cleanup BY: PythonHacker24 (Aditya Patil)
-# Version: 0.08
-# Date Modified 1/05/2024
+# Version: 0.09
+# Date Modified 9/22/2024
 # Requirements: requests, types-requests, & BeautifulSoup4 
 # Description: This tool gathers information from the end user about a specific target. First name, last/surname, location, etc. are gathered to generate a list and
 # scrape specific websites to gather additional information about the target. This is a reconnaissance tool that can be used by red teams to help facilitate penetration testing through social engineering.
@@ -10,13 +10,13 @@
 
 # Import Section
 try:
-        import requests
-        from bs4 import BeautifulSoup
+    import requests
+    from bs4 import BeautifulSoup
 
 except ModuleNotFoundError:
     print("""
           Required modules are not installed on the system
-          Modules required: requests, bs4
+          Modules required: requests, types-requests, bs4
           
           Try command: pip install requests bs4
           Closing OSINTProfiler...
@@ -32,7 +32,7 @@ titlescreen = """
 .##.....##.......##..##..##..####....##....##........##...##...##.....##.##........##..##.......##.......##...##..
 .##.....##.##....##..##..##...###....##....##........##....##..##.....##.##........##..##.......##.......##....##.
 ..#######...######..####.##....##....##....##........##.....##..#######..##.......####.########.########.##.....##
-Version: 0.08
+Version: 0.09
 BY: BRAD VORIS\n
 Updated Code and cleanup BY: PythonHacker24 (Aditya Patil)\n
 """
@@ -74,7 +74,8 @@ soup = ''
 # Security Evasion techniques for Requests should be here
 headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36","Upgrade-Insecure-Requests": "1", "Accept-Language": "en-GB,en-US;q=0.9,en;q=0.8", "Accept-Encoding": "gzip, deflate", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"}
 cookies = {'cookies_are': 'nom nom nom so good'}
-#, proxies={'http': proxy,'https': proxy})
+
+# currently not in use: proxies={'http': proxy,'https': proxy})
 
 # Application Section
 print(titlescreen)
@@ -85,9 +86,9 @@ input("Press enter to continue...")
 # Internal Functions
 
 def check_email(email):
-        if '@' not in email:
-            return False
-        return True
+    if '@' not in email:
+        return False
+    return True
 
 # While loop that runs the menu and application
 done = False
@@ -127,10 +128,10 @@ while not done:
 
         correct_address = False
         while correct_address == False:
-                emailaddress = input("\nWhat is the target's email address? ")
-                if check_email(emailaddress):
-                    break
-                print('\n Invalid email address, please try again .... ')
+            emailaddress = input("\nWhat is the target's email address? ")
+            if check_email(emailaddress):
+                break
+            print('\n Invalid email address, please try again .... ')
 
         MergedName = firstname + '-' + lastname
 
@@ -138,6 +139,7 @@ while not done:
         truepeople = str(f'https://www.truepeoplesearch.com/results?name={firstname}%20{lastname}&citystatezip={state}')
         findpeoplefast = str(f'https://findpeoplefast.net/people/{MergedName}/{stateabbr}')
         publicdatausa = str(f'https://www.publicdatausa.com/{MergedName}')
+        radaris = str(f'https://radaris.com/ng/search?ff={firstname}&fl={lastname}&fs={state}&fc={city}')
         spokeo = str(f'https://www.spokeo.com/{MergedName}?loaded=1')
         peoplefinders = str(f'https://www.peoplefinders.com/people/{MergedName}/{stateabbr}?landing=people')
         unmask = str(f'https://unmask.com/searching/?aid=25&firstName={firstname}&lastName={lastname}&city={city}&state={stateabbr}')
@@ -145,9 +147,10 @@ while not done:
         zabasearch = str(f'https://www.zabasearch.com/people/{firstname}+{lastname}/{city}+{stateabbr}/')
         phonelookup = str(f'https://www.phonelookup.com/1/{phonenumber}')
         reversephonewhitepages = str(f'https://www.whitepages.com/phone/1-{phonenumber}')
+        peoplebyname = str(f'https://www.peoplebyname.com/results.php?number={phonenumber}')
         
 # This is the list used to generate onscreen lists and reports
-        datalist = [truepeople, findpeoplefast, publicdatausa, spokeo, peoplefinders, unmask, peekyou, zabasearch]
+        datalist = [truepeople, findpeoplefast, publicdatausa, radaris, spokeo, peoplefinders, unmask, peekyou, zabasearch]
         phonedatalist = [phonelookup, reversephonewhitepages]
         input("\nPress Enter to return to the menu...")
 
@@ -182,10 +185,10 @@ while not done:
 # Exported Data from website parsing, appended to datalisthtmlout as a very large string, to be passed in func.write statement
             datalisthtmlout += str(page.text)
 # Creating an HTML file
-        Func = open("userreport.html","w", encoding="utf-8")
+        Func = open("user-report-" + MergedName + ".html","w", encoding="utf-8")
 # Adding input data to the HTML file & Saving the data into the HTML file
 # The override.css file is added to bypass additional CSS dumped from web scrape
-        Func.write(f'<html><head><title>OSINTProfiler Report</title><STYLE><link rel="stylesheet" href="override.css"></STYLE></head><body><h1>OSINTProfiler - Open Source Intelligence Profiler: Target Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li><li><a href="{zabasearch}" target="_blank" rel="noopener noreferrer">{zabasearch}</A></li></ul><BR />Phone Report: <a href="phonereport.html" target="_blank" rel="noopener noreferrer">Click here for phone report</a><BR/>{datalisthtmlout}</body></html>')
+        Func.write(f'<html><head><title>OSINTProfiler Report</title><STYLE><link rel="stylesheet" href="override.css"></STYLE></head><body><h1>OSINTProfiler - Open Source Intelligence Profiler: Target Report</h1><B>Created by: Brad Voris</B><BR/><BR/><I>{disclaimer}</I><BR/><I>{description}</I><BR/><BR/><B>Identified Target:</B> {lastname}, {firstname}<BR/><B>Target Location:</B> {city},{state}<BR/><B>Target Phone Number:</B> {phonenumber}<BR/><B>Target Email Address:</B> {emailaddress}<BR/><BR/><B>Web Urls Dictionary</B><BR/><UL><li><a href="{truepeople}" target="_blank" rel="noopener noreferrer">{truepeople}</a></li><li><a href="{findpeoplefast}" target="_blank" rel="noopener noreferrer">{findpeoplefast}</A></li><li><a href="{publicdatausa}" target="_blank" rel="noopener noreferrer">{publicdatausa}</A></li><li><a href="{radaris}" target="_blank" rel="noopener noreferrer">{radaris}</A></li><li><a href="{spokeo}" target="_blank" rel="noopener noreferrer">{spokeo}</A></li><li><a href="{peoplefinders}" target="_blank" rel="noopener noreferrer">{peoplefinders}</A></li><li><a href="{unmask}" target="_blank" rel="noopener noreferrer">{unmask}</A></li><li><a href="{peekyou}" target="_blank" rel="noopener noreferrer">{peekyou}</A></li><li><a href="{zabasearch}" target="_blank" rel="noopener noreferrer">{zabasearch}</A></li></ul><BR />Phone Report: <a href="phonereport.html" target="_blank" rel="noopener noreferrer">Click here for phone report</a><BR/>{datalisthtmlout}</body></html>')
 
 # Closing the file
         Func.close()
@@ -194,7 +197,7 @@ while not done:
         from bs4 import BeautifulSoup
 
 # Open the HTML file and read it into a string
-        with open('userreport.html', encoding="utf-8") as f:
+        with open('user-report-' + MergedName + '.html', encoding="utf-8") as f:
             html_doc = f.read()
 
 # Parse the HTML document
@@ -253,7 +256,7 @@ while not done:
             link.extract()
             
 # Write the modified HTML back to the file
-        with open('userreport.html', 'w') as f:
+        with open('user-report-' + MergedName + '.html', 'w', encoding="utf-8") as f:
             f.write(soup.prettify())
 
 # Print Return
@@ -276,6 +279,7 @@ while not done:
         print("Invalid input, select the provided options .... ")
 
 print("Closing OSINTProfiler...")
+
 
 
 
