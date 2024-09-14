@@ -1,0 +1,15 @@
+OSINSTProfiler Change Release Notes
+Version 0.09
+------------------------------------------------------------------------------
+New datapoint added to datalist
+
+update added encoding option for file write
+	minimizes encoding errors
+
+Reference: https://stackoverflow.com/questions/27092833/unicodeencodeerror-charmap-codec-cant-encode-characters
+
+Thonny Code warnings cleaned up
+
+Code comment clean up
+
+Updated File export name to target name
